@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: poker-telegram-bot
+    env: node
+    region: frankfurt  # или oregon, singapore
+    plan: free  # бесплатный план
+    buildCommand: |
+      npm install
+      # Если есть команда build
+      npm run build || true
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: POKERBOT_TOKEN
+        value: 8495990173:AAFVEq59ZnL0HgYJIu62-GQu-ToTzYLgwmQ
+      - key: POKERBOT_REDIS_HOST
+        value: ""  # оставляем пустым для простоты
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
